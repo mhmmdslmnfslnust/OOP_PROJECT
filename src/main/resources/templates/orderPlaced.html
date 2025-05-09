@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thank You!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+        crossorigin="anonymous">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #1f0a0a; /* Dark gray */
+            font-family: Arial, sans-serif;
+            color: #fff; /* White */
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .navbar {
+            background-color: #0f0a0a !important; /* Black */
+        }
+
+        .jumbotron {
+            color: #d62424; /* White */
+            margin-bottom: 0;
+            padding: 50px 0; /* Adjust padding as needed */
+            text-align: center;
+        }
+
+        .jumbotron-text {
+            text-align: center; /* Center align text */
+        }
+
+        .container-custom {
+            padding: 20px;
+            margin-bottom: 100px; /* Adjust margin to make space for contact info */
+        }
+
+        /* Go to Shop button animation */
+        .btn-shop {
+            background-color: #570609; /* Netflix red */
+            color: #f8f0f1; /* White */
+            transition: all 0.3s ease;
+            border-color: #0f0a0a;
+        }
+        
+        .btn-shop:hover {
+            border-color: #0f0a0a;
+            background-color: #570609; /* Dark Netflix red */
+            transform: scale(1.05); /* Increase size on hover */
+        }
+
+        /* Aligning contact info icons and text */
+        .contact-info .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .contact-info .col-md-4 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img th:src="@{/images/logo.png}" src="../static/images/logo.png" width="auto" height="50"
+                    class="d-inline-block align-top" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/shop}" href="#">Shop</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/cart}" href="#">Cart</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div style="background-color: #1b1111;" class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 jumbotron-text">
+                    <h1>Thank You for Shopping!</h1>
+                    <p>We appreciate your business. Click below to return to the homepage and continue shopping.</p>
+                    <a href="/" class="btn btn-primary btn-shop">Return to Homepage</a> <!-- Changed button color and added animation class -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
