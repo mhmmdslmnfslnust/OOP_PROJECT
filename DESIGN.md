@@ -52,7 +52,10 @@ OOP_PROJECT/
 │   │   │   └── application.properties                     # Application configuration
 │   └── test/
 │       └── java/                                          # Test classes
+...
 ```
+
+For complete structure see file [STRUCTURE.md](STRUCTURE.md)
 
 ## Architecture Overview
 
