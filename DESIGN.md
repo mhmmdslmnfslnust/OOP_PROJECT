@@ -9,6 +9,7 @@
   - [Creational Patterns](#creational-patterns)
   - [Structural Patterns](#structural-patterns)
   - [Behavioral Patterns](#behavioral-patterns)
+- [Design Patterns by Module Coverage](#design-patterns-by-module-coverage)
 - [Module Structure](#module-structure)
   - [Core Module](#core-module)
   - [UI Module](#ui-module)
@@ -151,6 +152,161 @@ The project adheres to the following key OOP principles:
 - **Implementation**: Used for implementing controller actions
 - **Files**: Controller methods in `src/main/java/com/example/oopproject/controller/`
 - **Purpose**: Encapsulates requests as objects
+
+## Design Patterns by Module Coverage
+
+This section provides a detailed mapping of design patterns used in each module of the OOP_PROJECT codebase.
+
+### configuration/ Module
+
+1. **Strategy Pattern**
+   - **Files**: `SecurityConfig.java`
+   - **Purpose**: Defines different authentication strategies (form login, OAuth2)
+   - **Implementation**: SecurityFilterChain configurers allow swapping different authentication mechanisms
+
+2. **Chain of Responsibility**
+   - **Files**: `SecurityConfig.java`
+   - **Purpose**: Security filters form a chain where each filter handles a specific aspect of security
+   - **Implementation**: Spring Security filter chain processes authentication/authorization requests sequentially
+
+3. **Observer Pattern**
+   - **Files**: `GoogleOAuth2SuccessHandler.java`
+   - **Purpose**: Reacts to successful authentication events
+   - **Implementation**: `AuthenticationSuccessHandler` observes authentication success events
+
+### controller/ Module
+
+1. **Front Controller Pattern**
+   - **Files**: All controller classes (`AdminController.java`, `HomeController.java`, `LoginController.java`, etc.)
+   - **Purpose**: Centralizes request handling through Spring MVC's DispatcherServlet
+   - **Implementation**: `@Controller` classes handle specific URL endpoints
+
+2. **Command Pattern**
+   - **Files**: All controller methods with `@GetMapping`, `@PostMapping`, etc.
+   - **Purpose**: Encapsulates requests as methods, allowing for different actions on resources
+   - **Implementation**: Controller methods with HTTP verb annotations act as commands
+
+3. **MVC Pattern**
+   - **Files**: All controller classes
+   - **Purpose**: Separates presentation from business logic
+   - **Implementation**: Controllers interact with services and update the model for view rendering
+
+### model/ Module
+
+1. **Entity Pattern** (Domain Model)
+   - **Files**: `User.java`, `Role.java`, `Product.java`, `Category.java`
+   - **Purpose**: Represents domain concepts as classes with attributes and behaviors
+   - **Implementation**: JPA entities with annotations
+
+2. **Composite Pattern**
+   - **Files**: `User.java` and `Role.java`
+   - **Purpose**: Represents the many-to-many relationship between users and roles
+   - **Implementation**: Users contain collections of roles, creating a hierarchical structure
+
+3. **Builder Pattern** (indirectly via Lombok)
+   - **Files**: Classes annotated with `@Data`
+   - **Purpose**: Simplifies object construction through generated builder methods
+   - **Implementation**: Lombok `@Data` generates setters for building objects
+
+### dto/ Module
+
+1. **Data Transfer Object Pattern**
+   - **Files**: `ProductDTO.java` (inferred from `AdminController.java`)
+   - **Purpose**: Transfers data between processes, reducing method calls
+   - **Implementation**: Plain Java objects with properties matching the data needed for specific operations
+
+2. **Adapter Pattern**
+   - **Files**: DTO transformations in service or controller classes
+   - **Purpose**: Converts between domain models and DTOs
+   - **Implementation**: Methods that map entity properties to/from DTOs
+
+### repository/ Module
+
+1. **Repository Pattern**
+   - **Files**: All interfaces extending `JpaRepository` (`UserRepository.java`, `ProductRepository.java`, etc.)
+   - **Purpose**: Abstracts data access logic, providing collection-like interface to domain objects
+   - **Implementation**: Spring Data JPA repositories
+
+2. **Factory Method Pattern**
+   - **Files**: Repository interfaces
+   - **Purpose**: Creates repository implementations at runtime
+   - **Implementation**: Spring Data JPA dynamically generates implementations of repository interfaces
+
+3. **Proxy Pattern**
+   - **Files**: Generated repository implementations
+   - **Purpose**: Provides additional functionality (transactions, caching) around repository operations
+   - **Implementation**: Spring uses proxies for repositories to add transaction management
+
+### service/ Module
+
+1. **Facade Pattern**
+   - **Files**: Service classes (`ProductService.java`, `CategoryService.java`, etc.)
+   - **Purpose**: Provides a simplified interface to complex subsystems
+   - **Implementation**: Service classes that orchestrate interactions between repositories and other components
+
+2. **Singleton Pattern**
+   - **Files**: All `@Service` classes
+   - **Purpose**: Ensures a single instance of service objects
+   - **Implementation**: Spring IoC container manages service instances as singletons by default
+
+3. **Template Method Pattern**
+   - **Files**: `CustomUserDetailService.java`
+   - **Purpose**: Defines skeleton of operations, deferring some steps to subclasses
+   - **Implementation**: Implements `UserDetailsService` with a template method for loading users
+
+### global/ Module
+
+1. **Singleton Pattern**
+   - **Files**: `GlobalData.java`
+   - **Purpose**: Maintains global application state (shopping cart)
+   - **Implementation**: Static fields provide a single point of access for cart data across the application
+
+2. **Registry Pattern**
+   - **Files**: `GlobalData.java`
+   - **Purpose**: Serves as a centralized storage for shopping cart data
+   - **Implementation**: Static collection maintains application-wide shopping cart state
+
+### templates/ (resources) Module
+
+1. **Template Method Pattern**
+   - **Files**: All Thymeleaf templates (`shop.html`, `cart.html`, etc.)
+   - **Purpose**: Defines the skeleton of page rendering with specific sections customized per view
+   - **Implementation**: Base layouts with fragment inclusions for customized sections
+
+2. **Composite Pattern**
+   - **Files**: Thymeleaf templates with nested fragments
+   - **Purpose**: Composes UI elements into hierarchical structures
+   - **Implementation**: Templates composed of smaller reusable fragments
+
+3. **Decorator Pattern**
+   - **Files**: CSS styling in templates
+   - **Purpose**: Adds visual behaviors to UI elements
+   - **Implementation**: CSS classes applied to HTML elements to enhance appearance
+
+### static/ (resources) Module
+
+No classic GoF design patterns are directly applicable to static resources (CSS, JavaScript, images). These files support the presentation layer but don't exhibit object-oriented design patterns themselves.
+
+### application.properties
+
+While not implementing a GoF design pattern, this file follows the **External Configuration** pattern, allowing runtime behavior to be configured without code changes.
+
+### src/test/ Module
+
+1. **Test Fixture Pattern**
+   - **Files**: `OopprojectApplicationTests.java` and other test classes
+   - **Purpose**: Sets up known good state before test execution
+   - **Implementation**: `@BeforeEach` or similar methods establishing test preconditions
+
+2. **Mock Object Pattern**
+   - **Files**: Test classes using mock frameworks
+   - **Purpose**: Simulates complex dependencies for isolated testing
+   - **Implementation**: Using frameworks like Mockito to create test doubles
+
+3. **Test Data Builder**
+   - **Files**: Test helper methods creating test data
+   - **Purpose**: Creates complex test objects with minimal code
+   - **Implementation**: Builder methods for constructing test entities
 
 ## Module Structure
 
