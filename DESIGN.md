@@ -477,14 +477,14 @@ The Service Module provides utilities and cross-cutting concerns:
 ### Shopping Cart Process
 
 ```
-┌──────┐          ┌───────────┐          ┌─────────────┐          ┌────────────┐
-│Client│          │ProductPage│          │CartController│         │GlobalData  │
-└──┬───┘          └─────┬─────┘          └──────┬──────┘          └──────┬─────┘
-   │  Add to Cart      │                        │                        │
+┌──────┐        ┌───────────┐           ┌──────────────┐         ┌────────────┐
+│Client│        │ProductPage│           │CartController│         │GlobalData  │
+└──┬───┘        └─────┬─────┘           └──────┬───────┘         └──────┬─────┘
+   │  Add to Cart     │                        │                        │
    │─────────────────>│                        │                        │
-   │                  │     addToCart()         │                        │
+   │                  │     addToCart()        │                        │
    │                  │───────────────────────>│                        │
-   │                  │                        │     add(product)        │
+   │                  │                        │     add(product)       │
    │                  │                        │───────────────────────>│
    │                  │                        │     Confirmation       │
    │                  │                        │<───────────────────────│
@@ -492,9 +492,9 @@ The Service Module provides utilities and cross-cutting concerns:
    │                  │<───────────────────────│                        │
    │  Shop Page       │                        │                        │
    │<─────────────────│                        │                        │
-┌──┴───┐          ┌─────┴─────┐          ┌──────┴──────┐          ┌──────┴─────┐
-│Client│          │ProductPage│          │CartController│         │GlobalData  │
-└──────┘          └───────────┘          └─────────────┘          └────────────┘
+┌──┴───┐        ┌─────┴─────┐           ┌──────┴───────┐         ┌──────┴─────┐
+│Client│        │ProductPage│           │CartController│         │GlobalData  │
+└──────┘        └───────────┘           └──────────────┘         └────────────┘
 ```
 
 ## Data Flow
