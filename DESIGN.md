@@ -450,14 +450,14 @@ The Service Module provides utilities and cross-cutting concerns:
 ### User Authentication Flow
 
 ```
-┌──────┐          ┌───────────┐          ┌─────────────┐          ┌────────────┐
-│Client│          │LoginScreen│          │LoginController│        │UserRepo    │
-└──┬───┘          └─────┬─────┘          └──────┬──────┘          └──────┬─────┘
-   │  Login Request    │                        │                        │
+┌──────┐        ┌───────────┐           ┌───────────────┐        ┌────────────┐
+│Client│        │LoginScreen│           │LoginController│        │UserRepo    │
+└──┬───┘        └─────┬─────┘           └──────┬────────┘        └──────┬─────┘
+   │  Login Request   │                        │                        │
    │─────────────────>│                        │                        │
-   │                  │     loginPost()         │                        │
+   │                  │     loginPost()        │                        │
    │                  │───────────────────────>│                        │
-   │                  │                        │     findUserByEmail()   │
+   │                  │                        │     findUserByEmail()  │
    │                  │                        │───────────────────────>│
    │                  │                        │     User Object        │
    │                  │                        │<───────────────────────│
@@ -469,9 +469,9 @@ The Service Module provides utilities and cross-cutting concerns:
    │                  │<───────────────────────│                        │
    │  Redirect to Home│                        │                        │
    │<─────────────────│                        │                        │
-┌──┴───┐          ┌─────┴─────┐          ┌──────┴──────┐          ┌──────┴─────┐
-│Client│          │LoginScreen│          │LoginController│        │UserRepo    │
-└──────┘          └───────────┘          └─────────────┘          └────────────┘
+┌──┴───┐        ┌─────┴─────┐           ┌──────┴────────┐        ┌──────┴─────┐
+│Client│        │LoginScreen│           │LoginController│        │UserRepo    │
+└──────┘        └───────────┘           └───────────────┘        └────────────┘
 ```
 
 ### Shopping Cart Process
